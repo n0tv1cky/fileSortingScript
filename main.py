@@ -1,7 +1,9 @@
 import os
 import shutil
+from dotenv import load_dotenv, dotenv_values
 
-cwd = "/Users/n0tv1cky/Downloads"
+load_dotenv()
+cwd = os.getenv("CWD")
 
 file_data = {
     'Media': {
@@ -35,10 +37,10 @@ excluded_files = ['.DS_Store', '.localized']
 for folder, data in file_data.items():
     if not os.path.isdir(data['path']):
         os.makedirs(data['path'])
-        print(f"{folder} folder created")
+        print(f"<< {folder} folder created >>")
 
-files = [f for f in os.listdir(cwd) if os.path.isfile(
-    os.path.join(cwd, f)) or f.endswith('.app') and f not in excluded_files]
+files = [f for f in os.listdir(cwd) if ((os.path.isfile(
+    os.path.join(cwd, f)) or f.endswith('.app')) and (f not in excluded_files))]
 
 if files:
     for file in files:
@@ -51,13 +53,14 @@ if files:
                 destination_path = file_info['path']
 
                 if file_path.endswith(tuple(extensions)):
-                    print(f"Moved {file} to {file_type} folder")
+                    print(f"<< Moved {file} to {file_type} folder >>")
                     shutil.move(file_path, destination_path)
                     moved = True
                     break
             if not moved:
-                print(f"Moved {file} to 'Misc' folder")
+                print(f"<< Moved {file} to 'Misc' folder >>")
                 shutil.move(file_path, file_data['Misc']['path'])
 
-    print("Sorting operation completed succesfully")
-print("No files to sort")
+    print("<- Sorting operation completed succesfully ->")
+else:
+    print("<- No files to sort ->")
