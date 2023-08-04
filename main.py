@@ -7,11 +7,11 @@ cwd = os.getenv("CWD")
 
 file_data = {
     'Media': {
-        'extensions': ['.jpg', '.jpeg', '.png', 'mpeg', '.mp4', '.mov'],
+        'extensions': ['.jpg', '.jpeg', '.png', 'mpeg', '.mp4', '.mov', '.CR2', '.ARW'],
         'path': os.path.join(cwd, "Media")
     },
     'Docs': {
-        'extensions': ['.pdf', '.docx', '.pptx'],
+        'extensions': ['.pdf', '.docx', '.pptx', '.xlsx'],
         'path': os.path.join(cwd, "Docs")
     },
     'DMG files': {
@@ -39,10 +39,14 @@ for folder, data in file_data.items():
         os.makedirs(data['path'])
         print(f"<< {folder} folder created >>")
 
-files = [f for f in os.listdir(cwd) if ((os.path.isfile(
-    os.path.join(cwd, f)) or f.endswith('.app')) and (f not in excluded_files))]
-
-if files:
+if files := [
+    f
+    for f in os.listdir(cwd)
+    if (
+        (os.path.isfile(os.path.join(cwd, f)) or f.endswith('.app'))
+        and (f not in excluded_files)
+    )
+]:
     for file in files:
         if file not in excluded_files:
             file_path = os.path.join(cwd, file)
