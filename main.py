@@ -7,11 +7,11 @@ cwd = os.getenv("CWD")
 
 file_data = {
     'Media': {
-        'extensions': ['.jpg', '.jpeg', '.png', 'mpeg', '.mp4', '.mov', '.CR2', '.ARW'],
+        'extensions': ['.jpg', '.jpeg', '.png', 'mpeg', '.mp4', '.mp3', '.mov', '.CR2', '.ARW'],
         'path': os.path.join(cwd, "Media")
     },
     'Docs': {
-        'extensions': ['.pdf', '.docx', '.pptx', '.xlsx'],
+        'extensions': ['.pdf', '.PDF', '.docx', '.doc', '.pptx', '.xlsx', '.xls'],
         'path': os.path.join(cwd, "Docs")
     },
     'DMG files': {
